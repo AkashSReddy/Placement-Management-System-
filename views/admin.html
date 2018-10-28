@@ -8,17 +8,10 @@
 
 <body>
 	<h1><i>Administrator Login</i></h1>
-	<form>
-		<div>
-			<label for="username">Username</label><br>
-			<input type="text" name="Username" id="username"><br>
-			<label for="password">Password</label><br>
-			<input type="password" name="pass" id="password">
-		</div>
-		<div>
-			<input type="button" onclick="location.href='adminlogin.html';" value="Login">
-			<input type="button" value="Go Back" onclick="location.href='home.html';">
-		</div>
+	<form action="/update" method="POST">
+		<div><input type="text" placeholder="Username" name="Username"></div>
+		<div><input type="password" placeholder="Password" name="Password"></div>
+		<div><button>Submit</button></div>
 	</form>
 </body>
 
