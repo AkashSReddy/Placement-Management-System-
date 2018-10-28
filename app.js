@@ -8,7 +8,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "Frontend")));
 
-app.post("/", function(req, res) {
+app.get("/", (req, res, next) => {
+  console.log("This is Home page");
+  fs.readFile("views/home.html", function(err, data) {
+    if (err) {
+      res.setHeader("content-type", "text/plain");
+      res.send("404 Page Not Found");
+    } else {
+      res.setHeader("content-type", "text/html");
+      res.send(data);
+    }
+    res.end();
+  });
+});
+
+app.post("/user", function(req, res) {
   console.log("Hello I am here too");
   res.setHeader("Content-Type", "application/json");
   var connection = mysql.createConnection({
@@ -85,7 +99,7 @@ app.post("/update", function(req, res) {
   var username = req.body.Username;
   var password = req.body.Password;
   console.log("/admin/update");
-  if (username === "root" && password === "bhavya1234") {
+  if (username === "1" && password === "") {
     connection = mysql.createConnection({
       host: "localhost",
       user: username,
@@ -95,7 +109,7 @@ app.post("/update", function(req, res) {
     connection.connect(function(err) {
       if (!err) {
         console.log("Connection Successful!!");
-        fs.readFile("Frontend/update.html", function(err, data) {
+        fs.readFile("views/update.html", function(err, data) {
           if (err) {
             res.send("404 Page Not found");
           } else {

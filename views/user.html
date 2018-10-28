@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>User</title>
 	<link rel="stylesheet" type="text/css" href="user.css">
 </head>
+
 <body>
 	<h1><i>Student's Information</i></h1>
-	<form>
-		<div>
+	<form action="/user" method="POST">
+		<!-- <div>
 			<label for="regno">Registration number: </label>
 			<input type="text" name="reg" placeholder="17BCE0001" required><br>
 			<input id="button" type="button" value="Submit">
 			<input type="button" value="Go Back" onclick="location.href='home.html';">
+		</div> -->
+
+		<div>
+			<input type="text" placeholder="RegNO" name="regno">
+			<button>submit</button>
 		</div>
 	</form>
-	
+
 </body>
+
 </html>
