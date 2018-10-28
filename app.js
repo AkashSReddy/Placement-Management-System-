@@ -27,41 +27,42 @@ app.post("/user", function(req, res) {
   res.setHeader("Content-Type", "application/json");
   var connection = mysql.createConnection({
     host: "localhost",
-    user: "akash",
-    password: "",
-    database: "info"
+    user: "root",
+    password: "bhavya1234",
+    database: "project"
   });
   connection.connect(function(err) {
     if (!err) {
-      var regno = req.query.regno;
+      var regno = req.body.regno;
       var query =
-        "select firstname,midname,lastname,branch,cgpa,name,student.contactno from student,company where regno = '" +
+        "select firstname,midname,lastname,branch,cgpa,student.contactno from student,company where regno = '" +
         regno +
         "' and student.cid=company.cid";
       console.log(query);
-      connection.query(query, function(err, fields) {
+      connection.query(query, function(err,result,fields) {
         if (err) console.log("There is an error");
-        // if(results.length>=0)
-        // {
+        // console.log(result);
+         if(result.length>=0)
+        {
         res.send(
           JSON.stringify({
             Name:
-              results[0].firstname +
+              result[0].firstname +
               " " +
-              results[0].midname +
+              result[0].midname +
               " " +
-              results[0].lastname,
-            Branch: results[0].branch,
-            CGPA: results[0].cgpa,
-            "Contact No": results[0].contactno,
-            Company: results[0].compname
+              result[0].lastname,
+            Branch: result[0].branch,
+            CGPA: result[0].cgpa,
+            "Contact No": result[0].contactno,
+            Company: result[0].compname
           })
         );
-        // }
-        // else
-        // {
-        // console.log("Not Found");
-        // }
+        }
+        else
+        {
+        console.log("Not Found");
+        }
       });
       connection.end();
     } else throw err;
@@ -99,7 +100,7 @@ app.post("/update", function(req, res) {
   var username = req.body.Username;
   var password = req.body.Password;
   console.log("/admin/update");
-  if (username === "1" && password === "") {
+  if (username === "root" && password === "bhavya1234") {
     connection = mysql.createConnection({
       host: "localhost",
       user: username,
