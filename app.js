@@ -41,27 +41,24 @@ app.post("/user", function(req, res) {
       console.log(query);
       connection.query(query, function(err, fields) {
         if (err) console.log("There is an error");
-        // if(results.length>=0)
-        // {
-        res.send(
-          JSON.stringify({
-            Name:
-              results[0].firstname +
-              " " +
-              results[0].midname +
-              " " +
-              results[0].lastname,
-            Branch: results[0].branch,
-            CGPA: results[0].cgpa,
-            "Contact No": results[0].contactno,
-            Company: results[0].compname
-          })
-        );
-        // }
-        // else
-        // {
-        // console.log("Not Found");
-        // }
+        if (results.length >= 0) {
+          res.send(
+            JSON.stringify({
+              Name:
+                results[0].firstname +
+                " " +
+                results[0].midname +
+                " " +
+                results[0].lastname,
+              Branch: results[0].branch,
+              CGPA: results[0].cgpa,
+              "Contact No": results[0].contactno,
+              Company: results[0].compname
+            })
+          );
+        } else {
+          console.log("Not Found");
+        }
       });
       connection.end();
     } else throw err;
